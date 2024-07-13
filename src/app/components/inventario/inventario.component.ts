@@ -20,7 +20,7 @@ import {IPageable} from "../../models/IPageable";
 export class InventarioComponent implements OnInit{
 
   pageable: IPageable | undefined;
-  inventarios: IInventario[] | undefined;
+  inventarios: IInventario[] | undefined = [];
   currentPage = 1; // Página actual del paginador
   itemsPerPage = 5; // Número de elementos por página
   totalItems = 0; // Total de elementos paginados
