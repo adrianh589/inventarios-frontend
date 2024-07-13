@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://nice-rock-0680e3b0f.5.azurestaticapps.net/",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
