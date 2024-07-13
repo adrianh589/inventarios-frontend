@@ -38,7 +38,7 @@
         <select class="form-select mb-2 bg-secondary text-white text-center"
                 formControlName="productoId"
         >
-          <option selected [value]="null">Productos</option>
+          <option selected [ngValue]="null">Productos</option>
           @for( producto of productos; track $index) {
             <option [value]="producto.id">{{ producto.nombreProducto }}</option>
           }

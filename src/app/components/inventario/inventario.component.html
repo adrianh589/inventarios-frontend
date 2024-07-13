@@ -3,7 +3,6 @@
     <h1>Entregar Inventario</h1>
   </div>
 
-  @if (inventarios) {
     <!-- Si no hay inventarios, se muestra el correspondiente mensaje -->
     @if (inventarios!.length <= 0) {
       <h2>No se encontraron inventarios</h2>
@@ -34,34 +33,32 @@
           </div>
         </div>
       }
-    }
 
-    <!-- Paginador de Bootstrap -->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link cursor" (click)="paginaCambiada(-1)" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Anterior</span>
-          </a>
-        </li>
-
-        @for (page of obtenerPaginasArray( pageable!.totalPages ); track $index) {
-          <li class="page-item" [class.active]="currentPage === page">
-            <a class="page-link cursor" (click)="paginaCambiada(page, true)">{{ page }}</a>
+      <!-- Paginador de Bootstrap -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link cursor" (click)="paginaCambiada(-1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Anterior</span>
+            </a>
           </li>
-        }
 
-        <li class="page-item" [class.disabled]="currentPage === pageable!.totalPages">
-          <a class="page-link cursor" (click)="paginaCambiada(+1)" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Siguiente</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  }
+          @for (page of obtenerPaginasArray( pageable!.totalPages ); track $index) {
+            <li class="page-item" [class.active]="currentPage === page">
+              <a class="page-link cursor" (click)="paginaCambiada(page, true)">{{ page }}</a>
+            </li>
+          }
 
+          <li class="page-item" [class.disabled]="currentPage === pageable!.totalPages">
+            <a class="page-link cursor" (click)="paginaCambiada(+1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Siguiente</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    }
 
   <!-- Redirección a la pantalla de registro -->
   <a [routerLink]="['/']">
