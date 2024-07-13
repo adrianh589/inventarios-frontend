@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="text-center">
+    <h1>Entregar Inventario</h1>
+  </div>
+
+  @if (inventarios) {
+    <!-- Si no hay inventarios, se muestra el correspondiente mensaje -->
+    @if (inventarios!.length <= 0) {
+      <h2>No se encontraron inventarios</h2>
+    } @else {
+      <!-- En caso de que existan inventarios, se muestran en lista -->
+      @for (inventario of inventarios; track $index) {
+        <!-- Contenido del inventario -->
+        <div class="card mb-3 w-100">
+          <div class="p-0 bg-white card-body rounded">
+            <!-- Titulo del producto -->
+            <h5 class="card-title">
+              {{ inventario.product.nombreProducto }}
+            </h5>
+            <!-- Numero de serie del inventario -->
+            <p class="card-text">
+              {{ inventario.numeroSerie }}
+            </p>
+            <!-- Botón de entrega del inventario, en caso de que ya se haya entregado se deshabilita -->
+            <button [ngClass]="{
+                  'btn-success': inventario.entregado,
+                  'btn-primary': !inventario.entregado
+                  }"
+                    [disabled]="inventario.entregado"
+                    class="btn w-100"
+                    (click)="cambiarEstadoEntrega(inventario)">
+              {{ inventario.entregado ? 'Entregado' : 'Entregar' }}
+            </button>
+          </div>
+        </div>
+      }
+    }
+
+    <!-- Paginador de Bootstrap -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link cursor" (click)="paginaCambiada(-1)" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Anterior</span>
+          </a>
+        </li>
+
+        @for (page of obtenerPaginasArray( pageable!.totalPages ); track $index) {
+          <li class="page-item" [class.active]="currentPage === page">
+            <a class="page-link cursor" (click)="paginaCambiada(page, true)">{{ page }}</a>
+          </li>
+        }
+
+        <li class="page-item" [class.disabled]="currentPage === pageable!.totalPages">
+          <a class="page-link cursor" (click)="paginaCambiada(+1)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Siguiente</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  }
+
+
+  <!-- Redirección a la pantalla de registro -->
+  <a [routerLink]="['/']">
+    Ir a registro de inventario
+  </a>
+</div>

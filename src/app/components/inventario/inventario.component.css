@@ -1,0 +1,13 @@
+.container {
+  max-width: 600px;
+}
+
+.card {
+  border: none;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
